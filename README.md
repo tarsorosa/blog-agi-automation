@@ -73,18 +73,17 @@ npm run cypress:run
 
 ## Geração de Relatórios e screenshots 
 
+Para gerar o relatório HTML consolidado, execute:
+
 ``` bash
 npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json
 npx marge cypress/reports/report.json -f report -o cypress/reports
 ```
+Após a execução dos testes, os artefatos são gerados automaticamente nos seguintes diretórios:
 
-------------------------------------------------------------------------
-
-## Melhorias Futuras
-
-- Adicionar testes de responsividade
-- Integrar com CI/CD (ex: GitHub Actions)
-- Publicação automática de relatórios de execução
+- Relatórios JSON: `cypress/reports/`
+- Relatório HTML consolidado: `cypress/reports/report.html`
+- Screenshots (em caso de falha): `cypress/screenshots/`
 
 ------------------------------------------------------------------------
 

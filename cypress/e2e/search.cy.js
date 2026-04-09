@@ -9,18 +9,25 @@ describe('template spec', () => {
 
   it('Pesquisar termo existente', () => {
     cy.get('[aria-label="Search icon link"]', {timeout: 10000})
-      .should('be.visible')
+      .filter(':visible')
       .first()
       .click()
-      //.filter(':visible')
-      //.click({ force: true })
 
-    cy.get('input[placeholder="Digite sua busca"]',  { timeout: 10000 })
+    cy.get('input[placeholder="Digite sua busca"]', { timeout: 10000 })
+      .should('be.visible')  
+      .type('Imposto de renda{enter}')
+
+    cy.location('search').should('match', /imposto/i)
+
+    cy.get('main', {timeout: 10000})
       .should('be.visible')
-      .type('imposto de renda{enter}')
 
-    cy.get('.post-item',  { timeout: 10000 })
+    cy.get('main a')
       .should('have.length.greaterThan', 0)
+
+    cy.get('main')
+      .contains('imposto', {matchCase: false})
+      .should('be.visible')
   })
 
   it('Pesquisar termo inexistente', () => {
@@ -28,14 +35,17 @@ describe('template spec', () => {
       .should('be.visible')
       .first()
       .click()
-      //.filter(':visible')
-      //.click()
 
     cy.get('input[placeholder="Digite sua busca"]', { timeout: 10000 })
       .should('be.visible')  
       .type('termoInexistente123{enter}')
     
-    cy.contains('Nenhum resultado', {timeout: 10000})
+    cy.url().should('include', 's=termoInexistente123')
+
+    cy.get('main', {timeout: 10000})
+      .should('be.visible')
+
+    cy.contains('Lamentamos, mas nada foi encontrado', {timeout: 10000})
       .should('be.visible')  
 
   })
