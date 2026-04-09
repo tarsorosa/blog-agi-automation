@@ -76,7 +76,7 @@ npm run cypress:run
 Para gerar o relatório HTML consolidado, execute:
 
 ``` bash
-npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json
+npx mochawesome-merge cypress/reports/mochawesome*.json > cypress/reports/report.json
 npx marge cypress/reports/report.json -f report -o cypress/reports
 ```
 Após a execução dos testes, os artefatos são gerados automaticamente nos seguintes diretórios:
