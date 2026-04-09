@@ -1,24 +1,24 @@
 {
   "stats": {
-    "suites": 1,
-    "tests": 1,
+    "suites": 2,
+    "tests": 4,
     "passes": 0,
     "pending": 0,
-    "failures": 1,
-    "testsRegistered": 1,
+    "failures": 4,
+    "testsRegistered": 4,
     "passPercent": 0,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
     "skipped": 0,
     "hasSkipped": false,
-    "start": "2026-04-09T11:51:41.699Z",
-    "end": "2026-04-09T11:51:56.426Z",
-    "duration": 14727
+    "start": "2026-04-09T17:19:05.090Z",
+    "end": "2026-04-09T17:21:48.974Z",
+    "duration": 163884
   },
   "results": [
     {
-      "uuid": "630cef92-b6a4-4bee-81b8-d235aa7a9f86",
+      "uuid": "1316a2b4-686f-477c-9d2f-6250f3a10d7f",
       "title": "",
       "fullFile": "cypress\\e2e\\search.cy.js",
       "file": "cypress\\e2e\\search.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "3c491d91-d1a2-46af-b64e-2c97c053543a",
+          "uuid": "fa494aa0-009d-4dd5-b817-2a415ed9753a",
           "title": "template spec",
           "fullFile": "",
           "file": "",
@@ -38,21 +38,43 @@
               "title": "Pesquisar termo existente",
               "fullTitle": "template spec Pesquisar termo existente",
               "timedOut": null,
-              "duration": 12193,
+              "duration": 6196,
               "state": "failed",
               "speed": null,
               "pass": false,
               "fail": true,
               "pending": false,
               "context": null,
-              "code": "cy.get('[aria-label=\"Search icon link\"]', {\n  timeout: 10000\n}).should('be.visible').filter(':visible').click({\n  force: true\n});\ncy.get('input[placeholder=\"Digite sua busca\"]').type('imposto de renda{enter}');\ncy.get('.post-item').should('have.length.greaterThan', 0);",
+              "code": "cy.get('[aria-label=\"Search icon link\"]', {\n  timeout: 10000\n}).filter(':visible').first().click();\ncy.get('input[placeholder=\"Digite sua busca\"]', {\n  timeout: 10000\n}).should('be.visible').type('Imposto de renda{enter}');\ncy.location('search').should('match', /imposto/i);\ncy.get('main', {\n  timeout: 10000\n}).should('be.visible');\ncy.get('main a').should('have.length.greaterThan', 0);\ncy.get('main').contains('imposto', {\n  matchCase: false\n}).should('be.visible');",
               "err": {
-                "message": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[aria-label=\"Search icon link\"]`, but never found it.",
-                "estack": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[aria-label=\"Search icon link\"]`, but never found it.\n    at Context.eval (webpack://blog-agi-automation/./cypress/e2e/search.cy.js:12:7)",
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `:visible`, but never found it. Queried from:\n\n              > cy.get([aria-label=\"Search icon link\"], [object Object])",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `:visible`, but never found it. Queried from:\n\n              > cy.get([aria-label=\"Search icon link\"], [object Object])\n    at Context.eval (webpack://blog-agi-automation/./cypress/e2e/search.cy.js:12:7)",
                 "diff": null
               },
-              "uuid": "5cc907cc-ba78-44bd-b2f5-f35431d4e45e",
-              "parentUUID": "3c491d91-d1a2-46af-b64e-2c97c053543a",
+              "uuid": "38d70683-7585-4e1f-a3ec-8bc6f18bd139",
+              "parentUUID": "fa494aa0-009d-4dd5-b817-2a415ed9753a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Pesquisar termo inexistente",
+              "fullTitle": "template spec Pesquisar termo inexistente",
+              "timedOut": null,
+              "duration": 11196,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('[aria-label=\"Search icon link\"]', {\n  timeout: 10000\n}).should('be.visible').first().click();\ncy.get('input[placeholder=\"Digite sua busca\"]', {\n  timeout: 10000\n}).should('be.visible').type('termoInexistente123{enter}');\ncy.url().should('include', 's=termoInexistente123');\ncy.get('main', {\n  timeout: 10000\n}).should('be.visible');\ncy.contains('Lamentamos, mas nada foi encontrado', {\n  timeout: 10000\n}).should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 10000ms: expected '[ <a.full-screen.astra-search-icon>, 1 more... ]' to be 'visible'\n\nThis element `[ <a.full-screen.astra-search-icon>, 1 more... ]` is not visible because it has an effective width and height of: `0 x 32` pixels.",
+                "estack": "AssertionError: Timed out retrying after 10000ms: expected '[ <a.full-screen.astra-search-icon>, 1 more... ]' to be 'visible'\n\nThis element `[ <a.full-screen.astra-search-icon>, 1 more... ]` is not visible because it has an effective width and height of: `0 x 32` pixels.\n    at Context.eval (webpack://blog-agi-automation/./cypress/e2e/search.cy.js:35:7)",
+                "diff": null
+              },
+              "uuid": "293afecd-a1c0-4e02-8d9c-97cba0ac1236",
+              "parentUUID": "fa494aa0-009d-4dd5-b817-2a415ed9753a",
               "isHook": false,
               "skipped": false
             }
@@ -60,11 +82,97 @@
           "suites": [],
           "passes": [],
           "failures": [
-            "5cc907cc-ba78-44bd-b2f5-f35431d4e45e"
+            "38d70683-7585-4e1f-a3ec-8bc6f18bd139",
+            "293afecd-a1c0-4e02-8d9c-97cba0ac1236"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 12193,
+          "duration": 17392,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "aecd2c16-8a66-4a89-b4a6-2599d1092ae2",
+      "title": "",
+      "fullFile": "cypress\\e2e\\search.cy.js",
+      "file": "cypress\\e2e\\search.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f0210856-4826-473a-bf87-02c68278ad11",
+          "title": "template spec",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Pesquisar termo existente",
+              "fullTitle": "template spec Pesquisar termo existente",
+              "timedOut": null,
+              "duration": 5831,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('[aria-label=\"Search icon link\"]', {\n  timeout: 10000\n}).filter(':visible').first().click();\ncy.get('input[placeholder=\"Digite sua busca\"]', {\n  timeout: 10000\n}).should('be.visible').type('Imposto de renda{enter}');\ncy.location('search').should('match', /imposto/i);\ncy.get('main', {\n  timeout: 10000\n}).should('be.visible');\ncy.get('main a').should('have.length.greaterThan', 0);\ncy.get('main').contains('imposto', {\n  matchCase: false\n}).should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `:visible`, but never found it. Queried from:\n\n              > cy.get([aria-label=\"Search icon link\"], [object Object])",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `:visible`, but never found it. Queried from:\n\n              > cy.get([aria-label=\"Search icon link\"], [object Object])\n    at Context.eval (webpack://blog-agi-automation/./cypress/e2e/search.cy.js:12:7)",
+                "diff": null
+              },
+              "uuid": "131f7fe7-d2be-4467-9337-9c720e803c0f",
+              "parentUUID": "f0210856-4826-473a-bf87-02c68278ad11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Pesquisar termo inexistente",
+              "fullTitle": "template spec Pesquisar termo inexistente",
+              "timedOut": null,
+              "duration": 11152,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('[aria-label=\"Search icon link\"]', {\n  timeout: 10000\n}).should('be.visible').first().click();\ncy.get('input[placeholder=\"Digite sua busca\"]', {\n  timeout: 10000\n}).should('be.visible').type('termoInexistente123{enter}');\ncy.url().should('include', 's=termoInexistente123');\ncy.get('main', {\n  timeout: 10000\n}).should('be.visible');\ncy.contains('Lamentamos, mas nada foi encontrado', {\n  timeout: 10000\n}).should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 10000ms: expected '[ <a.full-screen.astra-search-icon>, 1 more... ]' to be 'visible'\n\nThis element `[ <a.full-screen.astra-search-icon>, 1 more... ]` is not visible because it has an effective width and height of: `0 x 32` pixels.",
+                "estack": "AssertionError: Timed out retrying after 10000ms: expected '[ <a.full-screen.astra-search-icon>, 1 more... ]' to be 'visible'\n\nThis element `[ <a.full-screen.astra-search-icon>, 1 more... ]` is not visible because it has an effective width and height of: `0 x 32` pixels.\n    at Context.eval (webpack://blog-agi-automation/./cypress/e2e/search.cy.js:35:7)",
+                "diff": null
+              },
+              "uuid": "f5671913-f3e7-4f3f-a562-55a1ec7a9f2e",
+              "parentUUID": "f0210856-4826-473a-bf87-02c68278ad11",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "131f7fe7-d2be-4467-9337-9c720e803c0f",
+            "f5671913-f3e7-4f3f-a562-55a1ec7a9f2e"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 16983,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
